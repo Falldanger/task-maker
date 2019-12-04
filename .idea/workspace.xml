@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e4cf0c4-125b-43df-8637-6df15c36beb9" name="Default Changelist" comment="" />
+    <list default="true" id="7e4cf0c4-125b-43df-8637-6df15c36beb9" name="Default Changelist" comment="Routing api.php file added. Ajax technology was implemented to adding rows to table. indexController functions reworked.">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/connectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/connectionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/indexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/indexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/view.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +20,13 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1U1ODaNbNhVDOLE7PC0ePsZs1AY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Ajax" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -51,11 +63,31 @@
       <workItem from="1574719575386" duration="1183000" />
       <workItem from="1575054924154" duration="45000" />
       <workItem from="1575208017031" duration="9000" />
-      <workItem from="1575304429082" duration="5625000" />
+      <workItem from="1575304429082" duration="13742000" />
+      <workItem from="1575381621563" duration="15286000" />
+      <workItem from="1575407843579" duration="8793000" />
+      <workItem from="1575458658423" duration="18572000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Routing api.php file added. Ajax technology was implemented to adding rows to table. indexController functions reworked." />
+    <option name="LAST_COMMIT_MESSAGE" value="Routing api.php file added. Ajax technology was implemented to adding rows to table. indexController functions reworked." />
   </component>
 </project>

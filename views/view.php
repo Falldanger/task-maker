@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Подключаем Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Подключаем JQuery -->
@@ -10,14 +11,15 @@
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="#"/>
 </head>
 <body>
 <div class="container">
-    <h1>Task-maker</h1>
 
+    <h1>Task-maker</h1>
     <div class="row">
         <div class="col-md-4">
-            <form action="index.php" method="post">
+            <form action="api.php" id="form1" method="post">
                 <div class="form-group">
                     <label for="performerName">Performer FIO</label>
                     <input type="text" class="form-control" id="performerName" name="performerName"
@@ -65,7 +67,7 @@
                             end</a></th>
                 </tr>
             </table>
-            <form method="post" action="index.php" style="margin-bottom: 10px;">
+            <form method="post" action="controllers/indexController.php" style="margin-bottom: 10px;">
                 <span><b>Search by: </b></span>
                 <label for="searchFio"> Performer </label>
                 <input type="search" id="searchFio" name="searchFio" value="<?php if (isset($_POST['searchFio'])) {
@@ -78,45 +80,136 @@
                        } ?>">
                 <input type="submit" name="search" id="search" value="Search" class="btn btn-success"></br>
             </form>
-            <?php
+            <div>
+                <table id="result">
+                    <tr>
+                        <th>Performer</th>
+                        <th>Email</th>
+                        <th>Created_at</th>
+                        <th>Date end</th>
+                        <th>Task name</th>
+                        <th>Task description</th>
+                        <th>Delete</th>
+                    </tr>
+                    <?php
 
-            use controllers\Connection;
-            use controllers\indexController;
+                    use controllers\Connection;
+                    use controllers\indexController;
 
-            $startView=new indexController(new Connection());
-            $startView->index();
-
-            ?>
+                    if (empty($_GET) && empty($_POST)) {
+                        $startView = new indexController(new Connection());
+                        $startView->index();
+                    }
+                    ?>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    // $(document).ready(function () {
-    //     $('#submit').bind("click", function (event) {
-    //         ajax({'func': 1});
-    //     });
-    // });
-    $('#submit').click(function () {
-        var serialize = $('input,textarea').serializeArray();
-        let arr = [];
-        for (var i = 0; i < serialize.length; i++) {
-            arr[i] = serialize[i]['value'];
-        }
-        console.log(arr);
-        $.ajax({
-            url: 'controllers/indexController.php',
-            type: 'POST',
-            data: {
-                'data': arr,
-            },
-            success: function (data) {
-                $('#success').html(data);
-                alert('Task sent to mail');
-                console.log(data);
-            }
+    //function to delete data
+    $(document).ready(function () {
+        $('button#delete,#delete').on("click",function (event) {
+            var id = this.name;
+            console.log(id);
+            event.preventDefault();
+            del({'delete': 1,'id':id});
         });
     });
+
+    function del(data) {
+        $.ajax({
+            url: 'api.php',
+            type: "POST",
+            data: data,
+            dataType: "text",
+            error: error,
+            success: success
+        });
+    }
+    //function to add data
+    $(document).ready(function () {
+        $('#form1').submit(function (event) {
+            var serialize = $('#form1').serializeArray();
+            console.log({serialize, 'add': 1});
+            event.preventDefault();
+            add({serialize, 'add': 1});
+        });
+    });
+
+    function add(data) {
+        $.ajax({
+            url: 'api.php',
+            type: "POST",
+            data: data,
+            dataType: "text",
+            error: error,
+            success: success
+        });
+    }
+
+    function error() {
+        alert('error');
+    }
+
+    function success(result) {
+        var newresult = $.parseJSON(result);
+        console.log(newresult);
+
+        if (typeof newresult.status !== "undefined" && newresult.status !== 200) // Status code 200 represents Success/OK
+        {
+            alert("Unprocessable Entity " + newresult.status + '!' + newresult.statusText);
+        }
+        else {
+            console.log(newresult);
+            var arrId = [];
+            var str = '';
+            var str1 = '<tr>';
+            var th = '<tr><th>Performer</th>' + '<th>Email</th>' + '<th>Created_at</th>' + '<th>Date end</th>' +
+                '<th>Task name</th>' + '<th>Task description</th>' + '<th>Delete</th></tr>';
+            for (var i = 0; i < newresult.length; i++) {
+                str = newresult[i];
+                for (var n in str) {
+                    if (n === 'created_at' || n === 'date') {
+                        var date = new Date(str[n]);
+                        str[n] = ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear();
+                    }
+                    if (n === 'id') {
+                        str1 += '';
+                        arrId.push(str[n]);
+                    } else {
+                        str1 += '<td>' + str[n] + '</td>';
+                    }
+                }
+                str1 += "<td><button id='delete'"+" name="+"\""+arrId[i]+"\""+">delete</button></td></tr>";
+            }
+            $('#result').empty();
+            $('#result').append(th).append(str1);
+        }
+    }
+
+    // $('#submit').click(function () {
+    //     var serialize = $('input,textarea').serializeArray();
+    //     let arr = [];
+    //     for (var i = 0; i < serialize.length; i++) {
+    //         arr[i] = serialize[i]['value'];
+    //     }
+    //     console.log(arr);
+    //     $.ajax({
+    //         url: 'controllers/indexController.php',
+    //         type: 'POST',
+    //         data: {
+    //             'data': arr,
+    //         },
+    //         success: function (data) {
+    //             $('#success').html(data);
+    //             alert('Task sent to mail');
+    //             console.log(data);
+    //         }
+    //     });
+    // });
+    //
     // $('#search').click(function () {
     //     var serialize = $('input').serializeArray();
     //     let arr = [];

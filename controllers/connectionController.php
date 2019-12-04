@@ -35,7 +35,6 @@ class QueryBuilder
     {
         $statement = $this->db->query("SELECT * FROM $table");
         $res = $statement->fetchAll(PDO::FETCH_ASSOC);
-
         return $res;
     }
 }
