@@ -82,15 +82,6 @@
             </form>
             <div>
                 <table id="result">
-                    <tr>
-                        <th>Performer</th>
-                        <th>Email</th>
-                        <th>Created_at</th>
-                        <th>Date end</th>
-                        <th>Task name</th>
-                        <th>Task description</th>
-                        <th>Delete</th>
-                    </tr>
                     <?php
 
                     use controllers\Connection;
@@ -98,7 +89,7 @@
 
                     if (empty($_GET) && empty($_POST)) {
                         $startView = new indexController(new Connection());
-                        $startView->index();
+                        echo $startView->index();
                     }
                     ?>
                 </table>
@@ -162,30 +153,8 @@
             alert("Unprocessable Entity " + newresult.status + '!' + newresult.statusText);
         }
         else {
-            console.log(newresult);
-            var arrId = [];
-            var str = '';
-            var str1 = '<tr>';
-            var th = '<tr><th>Performer</th>' + '<th>Email</th>' + '<th>Created_at</th>' + '<th>Date end</th>' +
-                '<th>Task name</th>' + '<th>Task description</th>' + '<th>Delete</th></tr>';
-            for (var i = 0; i < newresult.length; i++) {
-                str = newresult[i];
-                for (var n in str) {
-                    if (n === 'created_at' || n === 'date') {
-                        var date = new Date(str[n]);
-                        str[n] = ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear();
-                    }
-                    if (n === 'id') {
-                        str1 += '';
-                        arrId.push(str[n]);
-                    } else {
-                        str1 += '<td>' + str[n] + '</td>';
-                    }
-                }
-                str1 += "<td><button id='delete'"+" name="+"\""+arrId[i]+"\""+">delete</button></td></tr>";
-            }
             $('#result').empty();
-            $('#result').append(th).append(str1);
+            $('#result').append(newresult);
         }
     }
 

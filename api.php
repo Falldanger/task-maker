@@ -86,7 +86,7 @@ if(isset($_POST['add'])&&$_POST['add']==1){
         if ($manipulations->add($data)) {
             //$manipulations->mailSend();//Send mail if task created
 //            $manipulations->handler($connection->getData());
-            $test=$connection->getData();
+            $test=$manipulations->index();
             echo json_encode($test);
         }
     }
@@ -96,7 +96,7 @@ if(isset($_POST['add'])&&$_POST['add']==1){
 }
         if (isset($_POST['delete'])&&$_POST['delete']==1) {
             if ($manipulations->delete($_POST['id'])) {
-                $test = $connection->getData();
+                $test = $manipulations->index();
                 echo json_encode($test);
             }
         }

@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e4cf0c4-125b-43df-8637-6df15c36beb9" name="Default Changelist" comment="Routing api.php file added. Ajax technology was implemented to adding rows to table. indexController functions reworked.">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/connectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/connectionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/indexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/indexController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/view.php" afterDir="false" />
     </list>
@@ -67,6 +65,7 @@
       <workItem from="1575381621563" duration="15286000" />
       <workItem from="1575407843579" duration="8793000" />
       <workItem from="1575458658423" duration="18572000" />
+      <workItem from="1575563918234" duration="4048000" />
     </task>
     <servers />
   </component>

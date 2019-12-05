@@ -14,6 +14,15 @@ class indexController
     public function index()
     {
         $connection = new connectionController();
+        $tableFirstPart='<tr>
+                        <th>Performer</th>
+                        <th>Email</th>
+                        <th>Created_at</th>
+                        <th>Date end</th>
+                        <th>Task name</th>
+                        <th>Task description</th>
+                        <th>Delete</th>
+                    </tr>';
             $tableMiddlePart = '';
             foreach ($connection->getData() as $data) {
                 $tableMiddlePart .= '<tr><td>' . $data['fio'] . '<td>' . $data['email'] . '</td>' . '<td>' . date('d.m.Y', strtotime($data['created_at'])) . '</td>'
@@ -21,7 +30,7 @@ class indexController
                     . '</td>' . '<td>' . $data['taskdescription'] . '</td>'
                     . '<td><button id=delete'.' name='."{$data['id']}".'>delete</button></td></tr>';
             }
-            echo $tableMiddlePart;
+            return $tableFirstPart.$tableMiddlePart;
     }
     public function add($data)
     {
